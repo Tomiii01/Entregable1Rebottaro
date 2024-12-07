@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App de Restaurante</title>
+  <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <h1>Simulador de Pedidos de Comida</h1>
+  <header>
+    <nav>
+      <a href="#menu" id="link-menu">Menú</a>
+      <a href="#pedido" id="link-pedido">Mi Pedido</a>
+    </nav>
+  </header>
 
-    <p>En este simulador de pedidos de comida, te permite tener un menu en donde puedes elegir distintas opciones con su precio, la final se realiza un resumen de tu pedido con el total del precio de tu compra.</p>
+  <main>
+    <section id="menu-section" class="section">
+      <h1>Bienvenido a nuestro restaurante</h1>
+      <h2>Menú</h2>
+      <div id="menu"></div>
+    </section>
 
+    <section id="pedido-section" class="section hidden">
+      <h2>Resumen de Pedido</h2>
+      <ul id="pedido-list"></ul>
+      <p id="total"></p>
+      <button id="confirmar-pedido">Confirmar Pedido</button>
+      <button id="cancelar-pedido">Cancelar Pedido</button>
+    </section>
+  </main>
 
+  <footer>
+    <p></p>
+  </footer>
 
-    <script src="javascript.js"></script>
+  <script src="javascript.js"></script>
 </body>
 </html>
+

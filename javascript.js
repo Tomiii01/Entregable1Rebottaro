@@ -1,79 +1,101 @@
-
-
 const menu = [
-  {nombre: "Pizzas", precio: 5000},
-  {nombre: "Hamburguesa simple", precio: 3800},
-  {nombre: "Hamburguesa completa", precio: 4000},
-  {nombre: "Hamburguesa especial", precio: 5000},
-  {nombre: "Lomito", precio: 4500}
-]
+  { nombre: "Pizzas", precio: 5000 },
+  { nombre: "Hamburguesa simple", precio: 3800 },
+  { nombre: "Hamburguesa completa", precio: 4000 },
+  { nombre: "Hamburguesa especial", precio: 5000 },
+  { nombre: "Lomito", precio: 4500 }
+];
 
+let pedido = JSON.parse(localStorage.getItem('pedido')) || [];
 
-let pedido = [];
+const menuContainer = document.getElementById('menu');
+const pedidoList = document.getElementById('pedido-list');
+const totalContainer = document.getElementById('total');
+const menuSection = document.getElementById('menu-section');
+const pedidoSection = document.getElementById('pedido-section');
+
+function mostrarSeccion(seccion) {
+  document.querySelectorAll('.section').forEach(sec => sec.classList.add('hidden'));
+  seccion.classList.remove('hidden');
+}
 
 function mostrarMenu() {
-  let mensaje = "Seleccione su comida:\n";
-  menu.forEach((platillo, index) => {
-    mensaje += `${index + 1}. ${platillo.nombre} - $${platillo.precio}\n`;
-
-  });
-  alert(mensaje);
+  menuContainer.innerHTML = menu.map((platillo, index) => `
+    <div class="menu-item">
+      ${platillo.nombre} - $${platillo.precio} 
+      <button onclick="agregarPlatillo(${index})">Agregar</button>
+    </div>
+  `).join('');
 }
 
-
-function agregarPlatillo() {
-  mostrarMenu();
-  let continuar = true;
-
-  while(continuar) {
-    let seleccion = parseInt(prompt("Ingrese el número de pedido que desea agregar:"));
-
-
-    if(seleccion > 0 && seleccion <= menu.length){
-      let platilloSeleccionado = menu[seleccion - 1];
-      pedido.push(platilloSeleccionado);
-      alert(`${platilloSeleccionado.nombre} ha sido agregado al pedido. `);
-    } else {
-      alert("Selección invalida. Por favor, ingrese un número válido.");
-    }
-    continuar = confirm("¿Desea agregar otro pedido?");
-  }
-
-}
-
-
-function calcularTotal() {
-  return pedido.reduce((total, platillo) => total + platillo.precio, 0);
+function agregarPlatillo(index) {
+  const platilloSeleccionado = menu[index];
+  pedido.push(platilloSeleccionado);
+  localStorage.setItem('pedido', JSON.stringify(pedido)); // Guardar en localStorage
+  alert(`${platilloSeleccionado.nombre} ha sido agregado al pedido.`);
 }
 
 function mostrarPedido() {
-  let mensaje = "Resumen de su pedido:\n";
-  pedido.forEach(platillo => {
-    mensaje += `${platillo.nombre} - $${platillo.precio}\n`;
-  });
-
-  let total = calcularTotal();
-  mensaje += `\nTotal a pagar: $${total}`;
-
-  let confirmar = confirm(`${mensaje}\n\n¿Desea confirmar su pedido?`);
-  if(confirmar){
-    alert("¡Gracias por su compra! Su pedido ha sido confirmado.");
-    mostrarPedidoConsola();
-  } else{
-    alert("Su pedido ha sido cancelado.");
+  if (pedido.length === 0) {
+    pedidoList.innerHTML = '<li>No hay productos en el pedido.</li>';
+    totalContainer.textContent = '';
+    return;
   }
+
+  pedidoList.innerHTML = pedido.map(platillo => `
+    <li>${platillo.nombre} - $${platillo.precio}</li>
+  `).join('');
+
+  const total = pedido.reduce((sum, platillo) => sum + platillo.precio, 0);
+  totalContainer.textContent = `Total a pagar: $${total}`;
 }
 
-function mostrarPedidoConsola() {
+function confirmarPedido() {
+  if (pedido.length === 0) {
+    alert("No hay productos en el pedido para confirmar.");
+    return;
+  }
+
+  alert("¡Gracias por su compra! Su pedido ha sido confirmado.");
+
   console.log("Resumen del pedido:");
-  pedido.forEach(platillo => {
-    console.log(`${platillo.nombre} - $${platillo.precio}`);
-  });
+  pedido.forEach(platillo => console.log(`${platillo.nombre} - $${platillo.precio}`));
+  console.log(`Total pagado: $${pedido.reduce((sum, p) => sum + p.precio, 0)}`);
 
-  let total = calcularTotal();
-  console.log(`Total a pagar: $${total}`);
+  
+  limpiarPedido();
+
+  pedidoList.innerHTML = '<li>¡Gracias por su compra! No hay productos en el pedido.</li>';
+  totalContainer.textContent = '';
 }
 
+function cancelarPedido() {
+  alert("Su pedido ha sido cancelado.");
+  limpiarPedido();
+}
 
-agregarPlatillo();
-mostrarPedido();
+function limpiarPedido() {
+  pedido = [];
+  localStorage.removeItem('pedido'); 
+  mostrarPedido();
+}
+
+document.getElementById('link-menu').addEventListener('click', () => {
+  mostrarSeccion(menuSection);
+});
+
+document.getElementById('link-pedido').addEventListener('click', () => {
+  mostrarSeccion(pedidoSection);
+  mostrarPedido();
+});
+
+document.getElementById('confirmar-pedido').addEventListener('click', confirmarPedido);
+document.getElementById('cancelar-pedido').addEventListener('click', cancelarPedido);
+
+
+mostrarSeccion(menuSection);
+mostrarMenu();
+
+
+
+
