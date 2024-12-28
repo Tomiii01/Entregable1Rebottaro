@@ -3,38 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App de Restaurante</title>
+  <title>Menú Restaurante</title>
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
   <header>
-    <nav>
-      <a href="#menu" id="link-menu">Menú</a>
-      <a href="#pedido" id="link-pedido">Mi Pedido</a>
-    </nav>
+    <h1>Restaurante Simulador</h1>
   </header>
 
   <main>
-    <section id="menu-section" class="section">
-      <h1>Bienvenido a nuestro restaurante</h1>
-      <h2>Menú</h2>
-      <div id="menu"></div>
+    <section id="carrito">
+      <h2>Carrito de compras</h2>
+      <div id="carrito-items">
+        <!-- Los elementos del carrito se mostrarán aquí -->
+      </div>
+      <!-- Botón para realizar la compra -->
+      <button id="boton-compra" onclick="realizarCompra()" style="display: none;">Realizar compra</button>
+      <!-- Mensaje de agradecimiento o error -->
+      <div id="mensaje-gracias"></div>
     </section>
 
-    <section id="pedido-section" class="section hidden">
-      <h2>Resumen de Pedido</h2>
-      <ul id="pedido-list"></ul>
-      <p id="total"></p>
-      <button id="confirmar-pedido">Confirmar Pedido</button>
-      <button id="cancelar-pedido">Cancelar Pedido</button>
+    <section id="menu">
+      <!-- Los platos se mostrarán aquí -->
     </section>
   </main>
 
-  <footer>
-    <p></p>
-  </footer>
-
-  <script src="javascript.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
 

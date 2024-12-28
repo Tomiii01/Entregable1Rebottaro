@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pizza Margarita",
+    "descripcion": "Pizza con salsa de tomate, mozzarella y albahaca fresca.",
+    "precio": 12500,
+    "imagen": "img/pizza-margarita.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Sushi Roll",
+    "descripcion": "Rollos de sushi con salmón y aguacate.",
+    "precio": 15000,
+    "imagen": "img/sushi.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Tacos al Pastor",
+    "descripcion": "Tacos de cerdo al pastor con piña y cebolla.",
+    "precio": 8000,
+    "imagen": "img/tacos-pastor.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Hamburguesa Clásica",
+    "descripcion": "Hamburguesa con carne, queso cheddar, lechuga y tomate.",
+    "precio": 10000,
+    "imagen": "img/burger-clasic.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Ensalada César",
+    "descripcion": "Ensalada con pollo, lechuga romana, croutons y aderezo César.",
+    "precio": 7500,
+    "imagen": "img/ensalada-cesar.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Paella de Mariscos",
+    "descripcion": "Arroz con mariscos frescos, pimientos y azafrán.",
+    "precio": 20000,
+    "imagen": "img/paella-mariscos.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "Spaghetti Bolognese",
+    "descripcion": "Spaghetti con salsa bolognesa casera y carne molida.",
+    "precio": 13000,
+    "imagen": "img/Spaghetti Bolognese.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Tarta de Manzana",
+    "descripcion": "Tarta de manzana con una capa de azúcar caramelizado.",
+    "precio": 5000,
+    "imagen": "img/tarta-manzana.jpg"
+  }
+]
