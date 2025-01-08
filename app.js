@@ -1,12 +1,13 @@
-
+// Fetch para obtener los datos de los platos desde data.json
 fetch('data.json')
   .then(response => response.json())
   .then(platos => {
     mostrarPlatos(platos);
 
+    // Función para mostrar los platos en el menú
     function mostrarPlatos(platos) {
       const contenedor = document.getElementById('menu');
-      contenedor.innerHTML = ''; 
+      contenedor.innerHTML = '';
 
       platos.forEach(plato => {
         const platoDiv = document.createElement('div');
@@ -27,22 +28,40 @@ fetch('data.json')
 
     let carrito = [];
 
+    // Función para agregar un plato al carrito
     window.agregarAlCarrito = function(id) {
       const plato = platos.find(plato => plato.id === id);
       if (plato) {
         carrito.push(plato);
         actualizarCarrito();
+        // Notificación con SweetAlert2
+        Swal.fire({
+          title: '¡Producto agregado!',
+          text: `${plato.nombre} se agregó al carrito.`,
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
       }
     };
 
+    // Función para eliminar un plato del carrito
     window.eliminarDelCarrito = function(id) {
       carrito = carrito.filter(plato => plato.id !== id);
       actualizarCarrito();
+      Swal.fire({
+        title: 'Producto eliminado',
+        text: 'El producto se eliminó del carrito.',
+        icon: 'info',
+        timer: 1500,
+        showConfirmButton: false,
+      });
     };
 
+    // Función para actualizar el carrito en el DOM
     function actualizarCarrito() {
       const carritoContenedor = document.getElementById('carrito-items');
-      carritoContenedor.innerHTML = ''; 
+      carritoContenedor.innerHTML = '';
       let total = 0;
 
       carrito.forEach(plato => {
@@ -68,18 +87,37 @@ fetch('data.json')
       }
     }
 
+    // Función para realizar la compra
     window.realizarCompra = function() {
-      const mensajeGracias = document.getElementById('mensaje-gracias');
       if (carrito.length > 0) {
-        mensajeGracias.innerHTML = '<h2>¡Muchas gracias por tu compra!</h2>';
-        carrito = []; 
-        actualizarCarrito();
+        Swal.fire({
+          title: '¡Gracias por tu compra!',
+          text: 'Tu pedido será procesado pronto.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        }).then(() => {
+          carrito = [];
+          actualizarCarrito();
+        });
       } else {
-        mensajeGracias.innerHTML = '<h2>El carrito está vacío. Agrega productos para realizar la compra.</h2>';
+        Swal.fire({
+          title: 'El carrito está vacío',
+          text: 'Por favor, agrega productos antes de comprar.',
+          icon: 'warning',
+          confirmButtonText: 'Aceptar',
+        });
       }
     };
   })
-  .catch(error => console.error('Error al cargar los datos:', error));
+  .catch(error => {
+    console.error('Error al cargar los datos:', error);
+    Swal.fire({
+      title: 'Error',
+      text: 'Hubo un problema al cargar los datos del menú.',
+      icon: 'error',
+      confirmButtonText: 'Aceptar',
+    });
+  });
 
 
 

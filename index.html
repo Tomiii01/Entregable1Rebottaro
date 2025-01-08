@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menú Restaurante</title>
   <link rel="stylesheet" href="estilos.css">
+  <!-- SweetAlert2 desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <header>
@@ -17,15 +19,15 @@
       <div id="carrito-items">
       </div>
       <button id="boton-compra" onclick="realizarCompra()" style="display: none;">Realizar compra</button>
-      
       <div id="mensaje-gracias"></div>
     </section>
 
-    <section id="menu">
-    </section>
+    <section id="menu"></section>
   </main>
 
   <script src="app.js"></script>
 </body>
 </html>
+
+
 
