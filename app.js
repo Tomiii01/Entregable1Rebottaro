@@ -1,10 +1,10 @@
-// Fetch para obtener los datos de los platos desde data.json
+
 fetch('data.json')
   .then(response => response.json())
   .then(platos => {
     mostrarPlatos(platos);
 
-    // Función para mostrar los platos en el menú
+
     function mostrarPlatos(platos) {
       const contenedor = document.getElementById('menu');
       contenedor.innerHTML = '';
@@ -28,13 +28,13 @@ fetch('data.json')
 
     let carrito = [];
 
-    // Función para agregar un plato al carrito
+
     window.agregarAlCarrito = function(id) {
       const plato = platos.find(plato => plato.id === id);
       if (plato) {
         carrito.push(plato);
         actualizarCarrito();
-        // Notificación con SweetAlert2
+        
         Swal.fire({
           title: '¡Producto agregado!',
           text: `${plato.nombre} se agregó al carrito.`,
@@ -45,7 +45,7 @@ fetch('data.json')
       }
     };
 
-    // Función para eliminar un plato del carrito
+  
     window.eliminarDelCarrito = function(id) {
       carrito = carrito.filter(plato => plato.id !== id);
       actualizarCarrito();
@@ -58,7 +58,7 @@ fetch('data.json')
       });
     };
 
-    // Función para actualizar el carrito en el DOM
+
     function actualizarCarrito() {
       const carritoContenedor = document.getElementById('carrito-items');
       carritoContenedor.innerHTML = '';
@@ -87,7 +87,7 @@ fetch('data.json')
       }
     }
 
-    // Función para realizar la compra
+
     window.realizarCompra = function() {
       if (carrito.length > 0) {
         Swal.fire({
